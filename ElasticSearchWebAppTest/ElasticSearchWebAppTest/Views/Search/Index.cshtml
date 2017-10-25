@@ -1,0 +1,59 @@
+@model SearchViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Search Index Page</h2>
+
+<a asp-controller="Search" asp-action="ListAll">List All Blogs</a>
+
+<form asp-controller="Search" asp-action="Index">
+    <div class="form-horizontal">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="SearchString" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="SearchString" class="form-control" type="text" placeholder="Search" autofocus />
+                <span asp-validation-for="SearchString" class="text-danger"></span>
+            </div>
+        </div>
+        @*<div class="form-group">
+            <label asp-for="SelectedTag" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="SelectedTag" class="form-control" multiple="multiple" asp-items="ViewBag.AggregationsByTags"></select>
+            </div>
+        </div>*@
+        @*@foreach (var item in Model.AvailableTags)
+        {
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="SelectedTags" value="@item.Value" checked="@item.Selected"/> @item.Text
+                </label>
+            </div>
+        }*@
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@if (Model.Posts != null && Model.Posts.Count() > 0)
+{
+    <h4>Results</h4>
+    <b>Amount of Hits: @Model.AmountOfHits</b>
+
+    @foreach (var post in Model.Posts)
+    {
+        @Html.Partial("ListPostsPage", post)
+    }
+    <br />
+
+}
+else
+{
+    <h4>No Results were found.</h4>
+}
+

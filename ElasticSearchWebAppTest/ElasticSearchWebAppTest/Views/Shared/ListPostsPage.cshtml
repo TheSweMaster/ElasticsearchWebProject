@@ -1,0 +1,58 @@
+@model ElasticSearchWebAppTest.Models.Post
+
+@{
+    ViewData["Title"] = "ListPostsPage";
+}
+
+<hr />
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.UserId)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.UserId)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Title)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Title)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Category)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Category)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.SubCategory)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.SubCategory)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.PostDate)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.PostDate)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.PostText)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.PostText)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Tags)
+    </dt>
+    <dd>
+        @if (Model.Tags.Count() > 0)
+        {
+            @foreach (var tag in Model.Tags)
+            {
+                <div>@tag</div>
+            }
+        }
+        @*@Html.DisplayFor(model => model.Tags)*@
+    </dd>
+</dl>

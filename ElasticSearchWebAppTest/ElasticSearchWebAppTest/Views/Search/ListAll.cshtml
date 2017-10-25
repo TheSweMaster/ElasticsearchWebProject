@@ -1,0 +1,74 @@
+@model IEnumerable<ElasticSearchWebAppTest.Models.Post>
+
+@{
+    ViewData["Title"] = "ListAll";
+}
+
+<h2>ListAll</h2>
+
+<a asp-controller="Search" asp-action="Index">Back To Search</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tags)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostText)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubCategory)
+            </td>
+            <td>
+                @if (item.Tags.Count() > 0)
+                {
+                    @foreach (var tag in item.Tags)
+                    {
+                        <div>@tag</div>
+                    }
+                }
+                @*@Html.DisplayFor(modelItem => item.Tags)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostDate)
+            </td>
+            <td>
+                @*@item.PostText.Substring(0, item.PostText.Count())*@
+                @Html.DisplayFor(modelItem => item.PostText)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+

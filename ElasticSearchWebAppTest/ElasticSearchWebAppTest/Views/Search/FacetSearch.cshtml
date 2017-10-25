@@ -1,0 +1,131 @@
+@model SearchViewModel
+
+@{
+    ViewData["Title"] = "FacetSearch";
+}
+
+<div id="outputResult">
+
+    <h2>FacetSearch</h2>
+    <a asp-controller="Home" asp-action="Index">Back To Menu</a>
+
+    <hr />
+    <form asp-controller="Search" asp-action="FacetSearch">
+        <div class="form-horizontal">
+            <div>
+                <b>Categories</b>
+            </div>
+            @foreach (var item in Model.AvailableCategories)
+            {
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="SelectedCategories" id="checkBoxCategoriesId" value="@item.Value"
+                               checked="@item.Selected" /> @item.Text
+                        </label>
+                    </div>
+            }
+            <br />
+            <div>
+                <b>Sub Categories</b>
+            </div>
+            @foreach (var item in Model.AvailableSubCategories)
+            {
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="SelectedSubCategories" id="checkBoxSubCategoriesId" value="@item.Value"
+                               checked="@item.Selected" /> @item.Text
+                        </label>
+                    </div>
+            }
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </form>
+    <hr />
+    <form asp-controller="Search" asp-action="FacetSearch">
+        <div class="form-horizontal">
+            <div>
+                <b>Categories</b>
+            </div>
+            @foreach (var item in Model.AvailableCategories)
+            {
+                <a class="checkbox" href="?selectedCategories=@item.Value">
+                    <label>
+                        <input type="checkbox" name="SelectedCategories" id="checkBoxCategoriesId" value="@item.Value"
+                               checked="@item.Selected" onchange="GetFacetDataScript(this)" /> @item.Text
+                        </label>
+                    </a>
+            }
+            <br />
+            <div>
+                <b>Sub Categories</b>
+            </div>
+            @foreach (var item in Model.AvailableSubCategories)
+            {
+                <a class="checkbox" href="?selectedSubCategories=@item.Value">
+                    <label>
+                        <input type="checkbox" name="SelectedSubCategories" id="checkBoxSubCategoriesId" value="@item.Value"
+                               checked="@item.Selected" onchange="GetFacetDataScript(this)" /> @item.Text
+                        </label>
+                    </a>
+            }
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </form>
+
+    @if (Model.Posts != null && Model.Posts.Count() > 0)
+    {
+        <h4>Results</h4>
+        <b>Amount of Hits: @Model.AmountOfHits</b>
+
+        @foreach (var post in Model.Posts)
+        {
+            @Html.Partial("ListPostsPage", post)
+        }
+        <br />
+
+    }
+    else
+    {
+        <h4>No Results were found.</h4>
+    }
+
+</div>
+
+
+@section Scripts
+    {
+    <script src="~/js/facet.js"></script>
+}
+
+
+@*@model SearchViewModel
+
+@{
+    ViewData["Title"] = "FacetSearch";
+}
+
+<h2>FacetSearch</h2>
+
+<div class="container">
+    <form asp-controller="Search" asp-action="FacetSearch">
+        @foreach (var item in Model.AvailableTags)
+        {
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="SelectedTags" value="@item.Value"/> @item.Text
+                    </label>
+                </div>
+        }
+        <div class="form-group text-center">
+            <input type="submit" class="btn btn-primary" value="Submit" />
+        </div>
+    </form>
+</div>*@
